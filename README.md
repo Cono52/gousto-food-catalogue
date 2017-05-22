@@ -15,9 +15,9 @@ To run in your browser you will need to allow-control-cross-origin.
 For Chrome, this can be done by installing the following extension:
 https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
 
-The components and how they consume Goustos "category" and "product" API'.
-
 Finally you can run ```npm start``` in the project directory. 
+
+The components and how they consume Goustos "category" and "product" API'.
 ---------------------
 
 The root component "App", upon mounting, retrieves the data from both endpoints using the Fetch API.
