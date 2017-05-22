@@ -19,7 +19,7 @@ It stores this data in its state along with a "selectedCategory" field to determ
 The "CategoryMenu" will take click events from the displayed categories group and toggle the "selectedCategory" in it's parent.
 
 The "ProductList" is given, from the "App" parent component, the product data and the "selectedCategory" field which will determine what product data is shown.
-Once the product list is filtered using the "selectedCategroy" prop, the list is converted to clickable "Product" components, which simply hold the title, description and state to toggle if the description is visible.
+Once the product list is filtered using the "selectedCategroy" prop, the list is converted to clickable "Product" components, which simply hold the products title, description and state to toggle if the description is visible.
 
 Finally the "SearchBox" component, the child of "ProductList", is fed all the "Product" components
 allowing them to be searched using the input field. 
