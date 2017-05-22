@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #16627F;
 }
 
 .Categories{
@@ -7,11 +8,12 @@
   flex-wrap: wrap;
   justify-content: center;
   background-color: #0B3140;
-  padding: 50px 20px 30px 20px;
+  padding: 30px 15px 30px 15px;
+  margin-bottom: 40px;
 }
 
 .title {
-  margin: 1px;
+  margin: 5px;
   padding: 10px 5px 10px 5px;
   min-width: 150px;
   background-color: #2CC5FF;
