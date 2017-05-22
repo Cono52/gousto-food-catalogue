@@ -12,7 +12,7 @@ Then in the directory run ```npm install```. *Might take little bit*
 
 To run in your browser you will need to allow-control-cross-origin.
 
-For Chrome, this can be done by installing the following extention:
+For Chrome, this can be done by installing the following extension:
 https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
 
 The components and how they consume Goustos "category" and "product" API'.
