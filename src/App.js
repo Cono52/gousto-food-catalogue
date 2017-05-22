@@ -27,26 +27,17 @@ class Products extends Component {
   }
 }
 
-class CatItem extends React.Component {
-    render() {
-        let classes = classnames('title', {selectedCat: (this.props.selectedCat === this.props.value)});
-        return <div 
-        className={classes} 
-        onClick={() => this.props.onClick(this.props.value)}>{this.props.value}</div>;
-    }
-}
-
 class CategoryMenu extends Component {
 
   render() {
-    const titles = this.props.categories.map(x => 
-      <CatItem 
-      key={shortid.generate()} 
-      value={x.title}
-      onClick={this.props.catClick}
-      selectedCat={this.props.selectedCat}
-      ></CatItem>
-    )
+    const titles = this.props.categories.map(x => {
+      let classes = classnames('title', {selectedCat: (this.props.selectedCat === x.title)});
+      return <div 
+        key={shortid.generate()} 
+        className={classes} 
+        onClick={() => this.props.catClick(x.title)}
+      >{x.title}</div>
+    })
 
     return (
       <div className="Categories"><h1>Store Cupboard</h1>{titles}</div>
