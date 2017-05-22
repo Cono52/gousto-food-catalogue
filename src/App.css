@@ -3,6 +3,12 @@
   background-color: white;
 }
 
+
+h1{
+  color: white;
+  width: 100%;
+}
+
 .Categories{
   display: flex;
   flex-wrap: wrap;
@@ -29,4 +35,10 @@
   font-weight: bolder;
   text-decoration: underline;
    background-color: #2FFAFF;
+}
+
+.productTitleContainer{
+  text-align: left;
+  margin: 10px 10px 10px 75px;
+  line-height: 1.5em;
 }

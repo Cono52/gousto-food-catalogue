@@ -49,7 +49,7 @@ class CategoryMenu extends Component {
     )
 
     return (
-      <div className="Categories">{titles}</div>
+      <div className="Categories"><h1>Store Cupboard</h1>{titles}</div>
     );
   }
 }
@@ -73,14 +73,18 @@ class App extends Component {
   getCategories() {
     return fetch('https://api.gousto.co.uk/products/v2.0/categories')
       .then(data => data.json())
-      .then(data => this.setState({categories: this.state.categories.concat(data.data)}));
+      .then(data => this.setState({
+        categories: this.state.categories.concat(data.data),
+        /*intialize category as first item in data*/ 
+        selectedCategory: data.data[0].title
+      }))
   }
 
 
   getProducts() {
     return fetch('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i')
       .then(data => data.json())
-      .then(data => this.setState({products: this.state.products.concat(data.data)}));
+      .then(data => this.setState({products: this.state.products.concat(data.data)}))
   }
 
 
