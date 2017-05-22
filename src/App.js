@@ -4,9 +4,28 @@ import shortid from 'shortid'
 import classnames from 'classnames'
 
 
+class Product extends Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      active: false
+    }
+  }
 
-class Products extends Component {
+  toggleDescription(){
+    this.setState({active: (this.state.active === false) ? true : false})
+  }
+
+  render(){
+    let classes = classnames('Product', {selectedProduct: (this.state.active)});
+    return <div className={classes} onClick={() => this.toggleDescription()}>{this.props.title}
+      <div className="description">{this.props.description}</div>
+    </div>
+  }
+}
+
+class ProductList extends Component {
 
     render() {
       /*Filter out items that don't match category*/
@@ -20,11 +39,12 @@ class Products extends Component {
         }
       })
 
-      const productTitles = productCategoryMatches.map(x =>  {
-          return <div className="productTitle" key={shortid.generate()}>{x.title}</div>
+      const products = productCategoryMatches.map(x =>  {
+          return <Product key={shortid.generate()} title={x.title} description={x.description}/>
       })
-      return <div className="productTitleContainer ">
-        {(productTitles.length !== 0) ? <SearchBox products={productTitles}/> : 'Nothing in this category today :('}
+
+      return <div className="productListContainer ">
+        {(products.length !== 0) ? <SearchBox products={products}/> : 'Nothing in this category today :('}
         </div>
   }
 }
@@ -44,13 +64,13 @@ class SearchBox extends Component {
 
   render(){
     let filtered = this.props.products.filter(item => {
-      return item.props.children.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+      return item.props.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
     })
     return <div>
        <input className="SearchBox" type="text"
       value={this.state.search}
       onChange={(e) => this.updateSearch(e)}/>
-      {(filtered.length !== 0) ? filtered : <div>no search results match..</div>}
+      {(filtered.length !== 0) ? filtered : <div >no search results match..</div>}
       </div>
   }
 }
@@ -119,10 +139,10 @@ class App extends Component {
         categories={this.state.categories} 
         catClick={this.handleCategoryClick.bind(this)}
         ></CategoryMenu>
-        <Products 
+        <ProductList
         selectedCat={this.state.selectedCategory} 
         products={this.state.products}
-        ></Products>
+        ></ProductList>
       </div>
     );
   }

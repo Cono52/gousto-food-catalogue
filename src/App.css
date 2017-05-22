@@ -37,12 +37,27 @@ h1{
    background-color: #2FFAFF;
 }
 
-.productTitleContainer{
+.productListContainer{
   text-align: left;
   margin: 10px 10px 10px 75px;
   line-height: 1.5em;
 }
 
 .SearchBox {
-  margin: 20px 0px 40px 0px
+  margin: 20px 0px 40px 0px;
+}
+
+.selectedProduct {
+  font-weight: bold;
+}
+
+.selectedProduct div{
+  display: block;
+  font-weight: normal;
+  margin: 5px;
+  font-size: 0.8rem;
+}
+
+.description{
+  display:none;
 }
