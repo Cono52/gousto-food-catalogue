@@ -25,13 +25,11 @@ class Product extends Component {
   }
 }
 
-class ProductList extends Component {
-
-    render() {
+function ProductList(props) {
       /*Filter out items that don't match category*/
-      const productCategoryMatches = this.props.products.filter(x =>  {
+      const productCategoryMatches = props.products.filter(x =>  {
         const productCategories = x.categories.map(cats => cats.title)
-        if(productCategories.indexOf(this.props.selectedCat) > -1){
+        if(productCategories.indexOf(props.selectedCat) > -1){
           return true
         }
         else{
@@ -45,8 +43,7 @@ class ProductList extends Component {
 
       return <div className="productListContainer ">
         {(products.length !== 0) ? <SearchBox products={products}/> : 'Nothing in this category today :('}
-        </div>
-  }
+      </div>
 }
 
 class SearchBox extends Component {
@@ -75,22 +72,18 @@ class SearchBox extends Component {
   }
 }
 
-class CategoryMenu extends Component {
-
-  render() {
-    const titles = this.props.categories.map(x => {
-      let classes = classnames('title', {selectedCat: (this.props.selectedCat === x.title)});
+function CategoryMenu(props) {
+    const titles = props.categories.map(x => {
+      let classes = classnames('title', {selectedCat: (props.selectedCat === x.title)});
       return <div 
         key={shortid.generate()} 
         className={classes} 
-        onClick={() => this.props.catClick(x.title)}
+        onClick={() => props.catClick(x.title)}
       >{x.title}</div>
     })
-
     return (
       <div className="Categories"><h1>Store Cupboard</h1>{titles}</div>
     );
-  }
 }
 
 class App extends Component {
