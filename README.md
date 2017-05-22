@@ -10,7 +10,14 @@ To run, install the latest version of Node and NPM, >= 6.*.*.
 
 Then in the directory run ```npm install```. *Might take little bit*
 
-The components and how they consume Goustos "category" and "product" API's
+To run in your browser you will need to allow-control-cross-origin.
+
+For Chrome, this can be down by installing the following extention:
+https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
+
+The components and how they consume Goustos "category" and "product" API'.
+
+Finally you can run ```npm start``` in the project directory. 
 ---------------------
 
 The root component "App", upon mounting, retrieves the data from both endpoints using the Fetch API.
@@ -22,4 +29,4 @@ The "ProductList" is given, from the "App" parent component, the product data an
 Once the product list is filtered using the "selectedCategroy" prop, the list is converted to clickable "Product" components, which simply hold the products title, description and state to toggle if the description is visible.
 
 Finally the "SearchBox" component, the child of "ProductList", is fed all the "Product" components
-allowing them to be searched using the input field. 
+allowing them to be searched using the input field.
