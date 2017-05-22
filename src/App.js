@@ -23,7 +23,35 @@ class Products extends Component {
       const productTitles = productCategoryMatches.map(x =>  {
           return <div className="productTitle" key={shortid.generate()}>{x.title}</div>
       })
-      return <div className="productTitleContainer ">{(productTitles.length !== 0) ? productTitles : "Nothing in this category today :("}</div>
+      return <div className="productTitleContainer ">
+        {(productTitles.length !== 0) ? <SearchBox products={productTitles}/> : 'Nothing in this category today :('}
+        </div>
+  }
+}
+
+class SearchBox extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      search: '',
+    }
+  }
+
+  updateSearch(event){
+    this.setState({search: event.target.value})
+  }
+
+  render(){
+    let filtered = this.props.products.filter(item => {
+      return item.props.children.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+    })
+    return <div>
+       <input className="SearchBox" type="text"
+      value={this.state.search}
+      onChange={(e) => this.updateSearch(e)}/>
+      {(filtered.length !== 0) ? filtered : <div>no search results match..</div>}
+      </div>
   }
 }
 
