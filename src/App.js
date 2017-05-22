@@ -7,28 +7,12 @@ import shortid from 'shortid'
 
 class Products extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      products: []
-    }
-  }
-
-  componentDidMount() {
-    this.getProducts()
-  }
-
-  getProducts() {
-    return fetch('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i')
-      .then(data => data.json())
-      .then(data => this.setState({products: this.state.products.concat(data.data)}));
-  }
-
-
   render() {
-    console.log(this.state.products)
+    const productTitles = this.props.products.map(x => 
+      <div className="prodTitle" key={shortid.generate()}>{x.title}</div>
+    )
     return (
-      <div></div>
+      <div>{productTitles}</div>
     );
   }
 }
@@ -36,27 +20,13 @@ class Products extends Component {
 
 class CategoryMenu extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      catItems: []
-    }
-  }
-
-  componentDidMount() {
-    this.getCategories()
-  }
-
-  getCategories() {
-    return fetch('https://api.gousto.co.uk/products/v2.0/categories')
-      .then(data => data.json())
-      .then(data => this.setState({catItems: this.state.catItems.concat(data.data)}));
-  }
-
-
   render() {
-    const titles = this.state.catItems.map(x => 
-      <div className="title" key={shortid.generate()}>{x.title}</div>
+    const titles = this.props.catItems.map(x => 
+      <div 
+      className="title" 
+      key={shortid.generate()} 
+      onClick={() => this.props.catClick(x.title)}
+      >{x.title}</div>
     )
 
     return (
@@ -66,11 +36,44 @@ class CategoryMenu extends Component {
 }
 
 class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      selectedCategory: '',
+      catItems: [],
+      products: []
+    }
+  }
+
+  componentDidMount() {
+    this.getCategories()
+    this.getProducts()
+  }
+
+  getCategories() {
+    return fetch('https://api.gousto.co.uk/products/v2.0/categories')
+      .then(data => data.json())
+      .then(data => this.setState({catItems: this.state.catItems.concat(data.data)}));
+  }
+
+
+  getProducts() {
+    return fetch('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i')
+      .then(data => data.json())
+      .then(data => this.setState({products: this.state.products.concat(data.data)}));
+  }
+
+
+  handleCategoryClick(catTitle){
+    console.log(catTitle)
+  }
+
   render() {
     return (
       <div className="App">
-        <CategoryMenu></CategoryMenu>
-        <Products></Products>
+        <CategoryMenu catItems={this.state.catItems} catClick={this.handleCategoryClick}></CategoryMenu>
+        <Products products={this.state.products}></Products>
       </div>
     );
   }
