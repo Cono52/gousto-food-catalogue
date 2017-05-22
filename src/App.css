@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #16627F;
+  background-color: white;
 }
 
 .Categories{
@@ -18,9 +18,14 @@
   min-width: 150px;
   background-color: #2CC5FF;
   border-radius: 2px;
-  transition: all 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .title:hover {
   background-color: #2FFAFF
+}
+
+.selectedCat {
+  font-weight: bolder;
+  text-decoration: underline;
 }

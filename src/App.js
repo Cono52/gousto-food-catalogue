@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import shortid from 'shortid'
+import classnames from 'classnames'
 
 
 
@@ -17,16 +18,30 @@ class Products extends Component {
   }
 }
 
+class CatItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    render() {
+        let classes = classnames('title', {selectedCat: (this.props.selectedCat === this.props.value)});
+        return <div 
+        className={classes} 
+        onClick={() => this.props.onClick(this.props.value)}>{this.props.value}</div>;
+    }
+}
 
 class CategoryMenu extends Component {
 
   render() {
     const titles = this.props.catItems.map(x => 
-      <div 
-      className="title" 
+      <CatItem 
       key={shortid.generate()} 
-      onClick={() => this.props.catClick(x.title)}
-      >{x.title}</div>
+      value={x.title}
+      onClick={this.props.catClick}
+      selectedCat={this.props.selectedCat}
+      ></CatItem>
     )
 
     return (
@@ -66,13 +81,17 @@ class App extends Component {
 
 
   handleCategoryClick(catTitle){
-    console.log(catTitle)
+    this.setState({selectedCategory: catTitle})
   }
 
   render() {
     return (
       <div className="App">
-        <CategoryMenu catItems={this.state.catItems} catClick={this.handleCategoryClick}></CategoryMenu>
+        <CategoryMenu 
+        selectedCat={this.state.selectedCategory} 
+        catItems={this.state.catItems} 
+        catClick={this.handleCategoryClick.bind(this)}
+        ></CategoryMenu>
         <Products products={this.state.products}></Products>
       </div>
     );
