@@ -27,24 +27,23 @@ class Product extends Component {
   }
 }
 
-function ProductList(props) {
+function ProductList({selectedCat, products}) {
       /*Filter out items that don't match category*/
-      const productCategoryMatches = props.products.filter(x =>  {
+      const categoryMatches = products.filter(x =>  {
         const productCategories = x.categories.map(cats => cats.title)
-        if(productCategories.indexOf(props.selectedCat) > -1){
+        if(productCategories.indexOf(selectedCat) > -1){
           return true
         }
-        else{
-          return false
-        }
+        return false
       })
 
-      const products = productCategoryMatches.map(x =>  {
+      const productComponents = categoryMatches.map(x =>  {
           return <Product key={shortid.generate()} title={x.title} description={x.description}/>
       })
 
       return <div className="productListContainer ">
-        {(products.length !== 0) ? <SearchBox products={products}/> : 'Nothing in this category today :('}
+        {(productComponents.length !== 0) 
+        ? <SearchBox products={productComponents}/> : 'Nothing in this category today :('}
       </div>
 }
 
@@ -74,13 +73,13 @@ class SearchBox extends Component {
   }
 }
 
-function CategoryMenu(props) {
-    const titles = props.categories.map(x => {
-      let classes = classnames('title', {selectedCat: (props.selectedCat === x.title)});
+function CategoryMenu({categories, selectedCat, catClick}) {
+    const titles = categories.map(x => {
+      let classes = classnames('title', {selectedCat: (selectedCat === x.title)});
       return <div 
         key={shortid.generate()} 
         className={classes} 
-        onClick={() => props.catClick(x.title)}
+        onClick={() => catClick(x.title)}
       >{x.title}</div>
     })
     return (
