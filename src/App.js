@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import shortid from 'shortid'
 import classnames from 'classnames'
+
+import './App.css';
+
 
 
 class Product extends Component {
