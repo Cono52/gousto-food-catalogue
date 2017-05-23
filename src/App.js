@@ -75,7 +75,7 @@ class SearchBox extends Component {
 
 function CategoryMenu({categories, selectedCat, catClick}) {
     const titles = categories.map(x => {
-      let classes = classnames('title', {selectedCat: (selectedCat === x.title)});
+      let classes = classnames('title', {selectedCat: (selectedCat === x.title)})
       return <div 
         key={shortid.generate()} 
         className={classes} 
@@ -121,7 +121,7 @@ class App extends Component {
   }
 
 
-  handleCategoryClick(catTitle){
+  handleCategoryClick = (catTitle) => {
     this.setState({selectedCategory: catTitle})
   }
 
@@ -129,16 +129,16 @@ class App extends Component {
     return (
       <div className="App">
         <CategoryMenu 
-        selectedCat={this.state.selectedCategory} 
-        categories={this.state.categories} 
-        catClick={this.handleCategoryClick.bind(this)}
+          selectedCat={this.state.selectedCategory} 
+          categories={this.state.categories} 
+          catClick={this.handleCategoryClick.bind(this)}
         ></CategoryMenu>
-        <ProductList
-        selectedCat={this.state.selectedCategory} 
-        products={this.state.products}
-        ></ProductList>
+        <ProductList 
+          selectedCat={this.state.selectedCategory} 
+          products={this.state.products}>
+        </ProductList>
       </div>
-    );
+    )
   }
 }
 
